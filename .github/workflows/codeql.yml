@@ -7,6 +7,7 @@ on:
     branches: [ "master" ]
   schedule:
     - cron: '36 2 * * 2'
+  workflow_dispatch: # Allow manual triggering
 
 permissions:
   actions: read
@@ -32,4 +33,7 @@ jobs:
       continue-on-error: true # Continue if make fails, for diagnostic purposes
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3
+      with:
+        output: sarif-results
+        upload: true
